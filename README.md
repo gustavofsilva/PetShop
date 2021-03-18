@@ -19,3 +19,7 @@ Então
     
     ng serve
     
+
+Também fiz uma Imagem no Docker apenas da API
+
+https://hub.docker.com/r/luizgfs/petshop
