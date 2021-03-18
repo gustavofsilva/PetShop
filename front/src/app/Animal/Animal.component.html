@@ -1,0 +1,42 @@
+
+
+  
+  <div class="form-group" class="form-group col-md-12" >
+    <b><label for="nomePet">Nome do Pet</label></b>
+    <input class="form-control" #box>
+    
+  </div>
+  <div>
+    <button class="btn btn-primary" (click) = "pesquisaByNome(box.value)">Submit</button>
+  </div>
+  <br>
+
+
+
+
+
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <td>Animal</td>
+      <td>Dono</td>
+      <td>Motivo</td>
+      <td>Estado</td>
+      <td>Endereço</td>
+      <td>Telefone</td>
+      <td>Foto</td>
+      
+    </tr>
+  </thead>
+
+  <tbody>
+      <td>{{animal.nome}}</td>
+      <td>{{animal.dono.nome}}</td>
+      <td>{{animal.motivoInternacao}}</td>
+      <td>{{animal.estadoSaude}}</td>
+      <td>{{animal.dono.endereco}}</td>
+      <td>{{animal.dono.telefone}}</td>
+      <td>{{animal.foto}}</td>      
+      
+  </tbody>
+</table>

@@ -1,0 +1,147 @@
+<br>
+
+
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <td>#</td>
+      <td>Ocupado</td>
+      <td>Animal</td>
+      <td>Dono</td>
+      <td>Motivo</td>
+      <td>Estado</td>
+      <td>Endereço</td>
+      <td>Telefone</td>
+      <td>Foto</td>
+      
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let alojamento of alojamentos">
+      <td>{{alojamento.id}}</td>
+      <td>{{alojamento.ocupado}}</td>
+      <td>{{alojamento.animal.nome}}</td>
+      <td>{{alojamento.animal.dono.nome}}</td>
+      <td>{{alojamento.animal.motivoInternacao}}</td>
+      <td>{{alojamento.animal.estadoSaude}}</td>
+      <td>{{alojamento.animal.dono.endereco}}</td>
+      <td>{{alojamento.animal.dono.telefone}}</td>
+      <td>{{alojamento.animal.foto}}</td>
+      
+      <td>
+        <div class="btn-group">
+          <button class="btn btn-sm btn-primary" tooltip="Editar" (click)="editarAlojamento(alojamento, template)">
+            <i class="fa fa-edit"></i>
+          </button>&nbsp;
+          <button class="btn btn-sm btn-danger" tooltip="Liberar Alojamento" (click)="deleteAnimal(alojamento)">
+            <i class="fa fa-eraser"></i>
+          </button>
+        </div>
+        
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<div bsModal #template="bs-modal" class="modal fade" tabindex="-1"
+     role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-sizes-name1" class="modal-title pull-left">Cadastrar Novo Pet</h4>
+        <button type="button" class="close pull-right" (click)="template.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        <form [formGroup] = "registerForm">
+          <div class="form-row">
+            <b>Informações do Pet</b>
+          </div>  
+          <div class="form-row">
+            <div class="form-group col-md-12">             
+              Nome do Pet:
+              <input type="text" class="form-control" 
+                [ngClass]="{'is-invalid': registerForm.controls['name'].errors && registerForm.controls['name'].touched}"
+                formControlName="name" placeholder="Insira o nome!">  
+              <div *ngIf ="registerForm.controls['name'].hasError('required') && registerForm.controls['name'].touched " class="invalid-feeback" >
+                Nome é obrigatório!
+              </div>
+
+              Motivo da Internação:
+              <input type="text" class="form-control" 
+                [ngClass]="{'is-invalid': registerForm.controls['motivoInternacao'].errors && registerForm.controls['motivoInternacao'].touched}"
+                formControlName="motivoInternacao" placeholder="Insira o motivo da Internação!">  
+              <div *ngIf ="registerForm.controls['motivoInternacao'].hasError('required') && registerForm.controls['motivoInternacao'].touched " class="invalid-feeback" >
+                Motivo é obrigatório!
+              </div>
+
+              Estado de Saúde
+              <select class="form-control" [ngClass]="{'is-invalid': registerForm.controls['estadoSaude'].errors && registerForm.controls['estadoSaude'].touched}"
+              formControlName="estadoSaude">
+                <option value="Em tratamento">Em tratamento</option>
+                <option value="Se Recuperando">Se Recuperando</option>
+                <option value="Recuperado">Recuperado</option>
+              </select>
+              <div *ngIf ="registerForm.controls['estadoSaude'].hasError('required') && registerForm.controls['estadoSaude'].touched " class="invalid-feeback" >
+                Estado de saúde é obrigatório!
+              </div>
+
+              Foto do pet:
+              <input type="text" class="form-control" formControlName="foto" placeholder="Insira o link de uma foto (opicional)">                
+            </div>
+          </div>  
+          <div class="form-row">
+            <b>Informações do Dono</b>      
+          </div>  
+          <div class="form-row">
+            <div class="form-group col-md-12">    
+              Nome do dono:
+              <input type="text" class="form-control" 
+                [ngClass]="{'is-invalid': registerForm.controls['donoNome'].errors && registerForm.controls['donoNome'].touched}"
+                formControlName="donoNome" placeholder="Insira o nome do dono!">  
+              <div *ngIf ="registerForm.controls['donoNome'].hasError('required') && registerForm.controls['donoNome'].touched " class="invalid-feeback" >
+                Nome do dono é obrigatório!
+              </div>
+
+              Telefone do dono:
+              <input type="text" class="form-control" 
+                [ngClass]="{'is-invalid': registerForm.controls['telefone'].errors && registerForm.controls['telefone'].touched}"
+                formControlName="telefone" placeholder="Insira o telefone do dono!">  
+              <div *ngIf ="registerForm.controls['telefone'].hasError('required') && registerForm.controls['telefone'].touched " class="invalid-feeback" >
+                Nome do dono é obrigatório!
+              </div>
+
+              Endereço do dono:
+              <input type="text" class="form-control" 
+                [ngClass]="{'is-invalid': registerForm.controls['endereco'].errors && registerForm.controls['endereco'].touched}"
+                formControlName="endereco" placeholder="Insira o endereco do dono!">  
+              <div *ngIf ="registerForm.controls['endereco'].hasError('required') && registerForm.controls['endereco'].touched " class="invalid-feeback" >
+                Endereço do dono é obrigatório!
+              </div>
+          </div>
+        </div>
+        
+          
+        </form>
+      </div>
+      
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="template.hide()">
+          Fechar
+        </button>
+        <button class="btn btn-primary ml-auto" (click)="salvarAlteracao(template)">
+          Salvar Alterações
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
